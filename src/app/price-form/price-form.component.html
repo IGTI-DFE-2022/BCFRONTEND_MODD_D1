@@ -1,0 +1,65 @@
+<div class="container">
+
+  <form #priceForm="ngForm" (ngSubmit)="calculatePrice(priceForm)">
+
+
+    <div class="origin-country">
+      <label for="origin-country">
+        <select name="origin-country" id="origin-country" [(ngModel)]="selectedOriginCountry">
+          <option value="">Select Origin Country</option>
+          <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="origin-city">
+      <label for="origin-city">
+        <select name="origin-city" id="origin-city" ngModel>
+          <option value="">Select Origin City</option>
+          <option [value]="city.name" *ngFor="let city of getOriginCities()">{{city.name}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="destination-country">
+      <label for="destination-country">
+        <select name="destination-country" id="destination-country" [(ngModel)]="selectedDestinationCountry">
+          <option value="">Select Destination Country</option>
+          <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="destination-city">
+      <label for="destination-city">
+        <select name="destination-city" id="destination-city" ngModel>
+          <option value="">Select Destination City</option>
+          <option [value]="city.name" *ngFor="let city of getDestinationCities()">{{city.name}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="adults">
+      <input type="number" name="adults" id="adults" placeholder="Adults" ngModel>
+    </div>
+
+    <div class="children">
+      <input type="number" name="children" id="children" placeholder="Children" ngModel>
+    </div>
+
+    <div class="type">
+      <label for="economy">
+        <input type="radio" name="type" id="economy" value="economy" ngModel>
+        Economy
+      </label>
+      <label for="executive">
+        <input type="radio" name="type" id="executive" value="executive" ngModel>
+        Executive
+      </label>
+    </div>
+
+    <button type="submit">Calculate</button>
+
+  </form>
+
+</div>
