@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { City } from '../model/city';
 import { BackendService } from '../services/backend.service';
+import { CalculatorService } from '../services/calculator.service';
 
 @Component({
   selector: 'app-price-form',
@@ -14,7 +15,10 @@ export class PriceFormComponent implements OnInit {
   selectedOriginCountry = '';
   selectedDestinationCountry = '';
 
-  constructor(private backendService: BackendService) {}
+  constructor(
+    private backendService: BackendService,
+    private calculatorService: CalculatorService
+  ) {}
 
   ngOnInit(): void {
     this.backendService.getCountries().subscribe((countries) => {
@@ -41,7 +45,33 @@ export class PriceFormComponent implements OnInit {
     return this.getCitiesFromCountry(this.selectedDestinationCountry);
   }
 
+  getCityFromName(cityName: string) {
+    console.log(`Trying to found city: ${cityName}`);
+    return this.cities.find((c) => c.name === cityName);
+  }
+
   calculatePrice(formData: any) {
+    let originCity = this.getCityFromName(formData.value['origin-city']);
+    let destinationCity = this.getCityFromName(
+      formData.value['destination-city']
+    );
     console.log(formData.value);
+    if (!originCity || !destinationCity) {
+      console.log('Cities not found');
+      return;
+    }
+
+    let result = this.calculatorService.calculatePrice(
+      originCity,
+      destinationCity,
+      {
+        adults: formData.value['adults'],
+        children: formData.value['children'],
+        type: formData.value['type'],
+        miles: formData.value['miles'],
+      }
+    );
+
+    console.log(result);
   }
 }

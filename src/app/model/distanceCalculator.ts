@@ -22,6 +22,9 @@ export function getDistance(origin: City, destination: City) {
             Math.sin(diffLongitudeRadians / 2)
       )
     );
+  console.log(
+    `Distance between ${origin.name} and ${destination.name} is ${kmDistance} km`
+  );
   return kmDistance;
 }
 

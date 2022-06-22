@@ -1,0 +1,8 @@
+<div class="container" *ngIf="result">
+  <h2>Results</h2>
+  <div class="adults">Price per adult: {{result.adultUnitPrice | currency:"BRL"}}</div>
+  <div class="adults">Price per child: {{result.childUnitPrice | currency:"BRL"}}</div>
+  <div class="adults">Total Price: {{result.priceWithoutDiscount| currency:"BRL"}}</div>
+  <div class="adults">Miles Discount: {{result.milesDiscount | currency:"BRL"}}</div>
+  <div class="adults">Final Price: {{result.finalPrice| currency:"BRL"}}</div>
+</div>

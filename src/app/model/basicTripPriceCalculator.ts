@@ -12,8 +12,8 @@ export class BasicTripPriceCalculator implements TripPriceCalculator {
   ): TripResult {
     let kmDistance = getDistance(origin, destination);
     let sameCountry = origin.country === destination.country;
-    let adultPrice = sameCountry ? kmDistance * 0.3 : 0.5;
-    let childPrice = sameCountry ? kmDistance * 0.15 : 0.25;
+    let adultPrice = sameCountry ? kmDistance * 0.3 : kmDistance * 0.5;
+    let childPrice = sameCountry ? kmDistance * 0.15 : kmDistance * 0.25;
 
     if (options.type === 'executive') {
       adultPrice *= 1.8;
